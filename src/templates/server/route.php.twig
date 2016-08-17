@@ -1,0 +1,14 @@
+{% autoescape false %}
+<?php
+
+Route::group(['prefix' => 'api/v1'], function () {
+    Route::group(['namespace' => 'Generator', 'middleware' => ['api']], function () {
+
+    	/**
+         * Resource route here
+         */
+        Route::resource('{{model.prefix}}', '{{model.controllerName}}Controller');
+    });
+});
+
+{% endautoescape %}

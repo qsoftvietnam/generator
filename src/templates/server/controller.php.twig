@@ -1,0 +1,170 @@
+{% autoescape false %}
+<?php
+
+namespace {{ model.namespace -}}Http\Controllers\Generator;
+
+use {{ model.namespace -}}Http\Controllers\Controller;
+use {{ model.namespace -}}Models\{{model.modelName}};
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
+
+class {{model.controllerName}}Controller extends Controller
+{
+
+    /**
+     * [$model description]
+     * @var [type]
+     */
+    protected $model;
+
+    /**
+     * [__construct description]
+     * @param {{model.modelName}} $model
+     */
+    public function __construct({{model.modelName}} $model)
+    {
+        $this->model = $model;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {        
+        try {
+            $datas = {{model.modelName}}::paginate($request->pageZize ? $request->pageZize : 15);
+
+            return response()->json($datas);
+        } catch (QueryException $e) {
+            return response()->json(['message' => 'Not found'], 404);
+        }
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $data       = $this->model;
+        {% for field in model.fields -%}
+        {% if field.options.references == false -%}
+        {% if field.nullable -%}
+        if ($request->has('{{- field.name -}}')) {
+            $data->{{- field.name }} = $request->{{- field.name -}};
+        }
+        {% else -%}
+        $data->{{- field.name }} = $request->{{- field.name -}};
+        {% endif -%}
+        {% endif -%}        
+        {% endfor %}
+
+        try {
+            $data->save();
+            return response()->json($data);
+        } catch (QueryException $e) {
+            return response()->json(['message' => $e->getMessage()], 403);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        try {
+            $data = $this->model->findOrFail($id);
+            return response()->json($data);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => $e->getMessage()], 404);
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        try {
+            $data       = $this->model->findOrFail($id);
+            {% for field in model.fields -%}                
+            {% if field.options.references == false -%}
+            {% if field.nullable -%}
+            if ($request->has('{{- field.name -}}')) {
+                $data->{{- field.name }} = $request->{{- field.name -}};
+            }
+            {% else -%}
+            $data->{{- field.name }} = $request->{{- field.name -}};
+            {% endif -%}
+            {% endif -%}                
+            {% endfor %}
+            
+            try {
+                $data->save();
+                return response()->json($data);
+            } catch (QueryException $e) {
+                return response()->json(['message' => $e->getMessage()], 403);
+            }
+
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => $e->getMessage()], 404);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        try {
+            $data = $this->model->findOrFail($id);
+            try {
+                $data->delete();
+                return response()->json($data);
+            } catch (QueryException $e) {
+                return response()->json(['message' => $e->getMessage()], 403);
+            }
+
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => $e->getMessage()], 404);
+        }
+    }
+}
+
+{% endautoescape %}

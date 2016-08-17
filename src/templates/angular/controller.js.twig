@@ -1,0 +1,125 @@
+{% autoescape %}
+(function() {
+    'use strict';
+
+  	angular.module('{{model.controllerModule}}')
+    .controller('{{model.controllerName}}Controller', {{model.controllerName}}Controller)
+    .controller('{{model.controllerName}}DetailController', {{model.controllerName}}DetailController)
+    .controller('{{model.controllerName}}FormController', {{model.controllerName}}FormController);
+
+  	{{model.controllerName}}Controller.$inject = ['$scope', 'listData', '{{model.serviceName}}Service', '$state', 'toastr'];
+
+  	function {{model.controllerName}}Controller($scope, listData, selfService, $state, toastr) {
+		var vm = this;
+		vm.datas = listData;
+    	// {{model.controllerName}} controller logic
+    	// ...
+
+		init();
+
+		function init() {
+			
+		}    	
+
+		function loadData(params) {
+			selfService.getAll(params).then(function(res) {
+				vm.datas = res;
+			}, function() {
+
+			});
+		}
+
+		vm.reload = loadData;
+
+		vm.create = function() {
+			$state.go('app.{{- model.prefix -}}.create');
+		};
+    	
+    	vm.view = function(item) {
+			$state.go('app.{{- model.prefix -}}.view', {
+				id: item.id
+			});
+		};
+
+    	vm.edit = function(item) {
+			$state.go('app.{{- model.prefix -}}.edit', {
+				id: item.id
+			});
+		};
+
+		vm.delete = function(item) {
+			selfService.remove(item).then(function(res) {
+				_.remove(vm.datas.data, {
+					id: res.id
+				});
+				toastr.warning('Delete success!', 'Notification');
+			}, function(err) {
+				toastr.error('Somgthing wrong!', 'Notification');
+			});
+		};
+
+		vm.pageChanged = function() {
+			loadData({
+				page: vm.datas.current_page
+			});
+		};
+	}
+
+	{{model.controllerName}}DetailController.$inject = ['$scope', 'data', '$state'];
+
+  	function {{model.controllerName}}DetailController($scope, data, $state) {
+		var vm = this;
+		vm.data = data;
+    	// {{model.controllerName}} controller logic
+    	// ...
+
+		init();
+
+		function init() {
+		}    	
+    	
+    	vm.back = function() {
+			$state.transitionTo('app.{{- model.prefix -}}', null, {
+				reload: true
+			});
+    	};    	
+	}
+
+
+	{{model.controllerName}}FormController.$inject = ['$scope', 'data', '{{model.serviceName}}Service', 'toastr', '$state'];
+
+  	function {{model.controllerName}}FormController($scope, data, selfService, toastr, $state) {
+		var vm = this;
+		vm.data = data;
+    	// {{model.controllerName}} controller logic
+    	// ...
+
+		init();
+
+		function init() {
+		}    	
+    	
+    	vm.back = function() {
+			$state.transitionTo('app.{{- model.prefix -}}', null, {
+				reload: true
+			});
+    	};
+    	vm.save = function() {
+			if (vm.data.id) {
+				vm.data.save().then(function(res) {
+					toastr.success('Update success!', 'Notification!');
+				}, function(err) {
+					toastr.error('Update error!', 'Notification!');
+				});
+			} else {
+				selfService.add(vm.data).then(function(res) {
+					toastr.success('Create success', 'Notification!');
+				}, function() {
+					toastr.error('Create error!', 'Notification!');
+				});
+			}
+    	};
+	}
+
+})();
+{% endautoescape %}

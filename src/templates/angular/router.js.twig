@@ -1,0 +1,72 @@
+{% autoescape %}
+(function(){
+	'use strict';
+
+	angular.module('{{- model.routeModel -}}')
+		.config(['$stateProvider', '$urlRouterProvider',
+			function($stateProvider, $urlRouterProvider) {			
+				//
+				// Now set up the states
+				$stateProvider
+					.state('app.{{- model.prefix -}}', {
+						url: '/{{- model.url -}}',
+						templateUrl: 'modules/{{- model.url -}}/index.tpl.html',
+						controller: '{{- model.controllerName -}}Controller',
+						controllerAs: 'vm',
+						resolve: {
+							listData: listData
+						}
+					})
+					.state('app.{{- model.prefix -}}.create', {
+						url: '/create',
+						templateUrl: 'modules/{{- model.url -}}/form.tpl.html',
+						controller: '{{- model.controllerName -}}FormController',
+						controllerAs: 'vm',
+						resolve: {
+							data: function() {
+								return {};
+							}
+						}
+					})
+					.state('app.{{- model.prefix -}}.view', {
+						url: '/:id',
+						templateUrl: 'modules/{{- model.url -}}/detail.tpl.html',
+						controller: '{{- model.controllerName -}}DetailController',
+						controllerAs: 'vm',
+						resolve: {
+							data: getData
+						}
+					})
+					.state('app.{{- model.prefix -}}.edit', {
+						url: '/:id/edit',
+						templateUrl: 'modules/{{- model.url -}}/form.tpl.html',
+						controller: '{{- model.controllerName -}}FormController',
+						controllerAs: 'vm',
+						resolve: {
+							data: getData
+						}
+					});
+			}
+		])
+		.run(['menuService', function(Menus){
+			Menus.addMenuItem('topbar', {
+				title: '{{- model.name -}}',
+				state: 'app.{{- model.prefix -}}',
+				roles: ['*']
+			});
+		}]);
+
+	listData.$inject = ['{{model.serviceName}}Service'];
+
+	function listData(selfService) {
+		return selfService.getAll();
+	}
+
+	getData.$inject = ['{{model.serviceName}}Service', '$stateParams'];
+
+	function getData(selfService, $stateParams) {
+		return selfService.get($stateParams.id);
+	}
+
+})();
+{% endautoescape %}

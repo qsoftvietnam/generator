@@ -1,0 +1,24 @@
+<form name="form" ng-submit="vm.save(form)" novalidate>
+    <br>
+    <a ng-click="vm.back()" class="button">
+        <i class="fa fa-arrow-left"></i> &nbsp; Back
+    </a>
+    {% for field in model.fields -%}
+    {% if field.options.references == false -%}
+    <label class="label">{{field.name}}</label>
+    <div class="control">        
+        {% if field.nullable -%}
+        <input class="input" name="{{- field.name -}}" ng-model="vm.data.{{field.name}}" type="text" placeholder="">
+        {%- else -%}
+        <input class="input" name="{{- field.name -}}" ng-model="vm.data.{{field.name}}" type="text" placeholder="" required>                            
+        <div ng-show="form.$submitted || form.{{- field.name -}}.$touched">                            
+            <span class="help is-danger" ng-show="form.{{- field.name -}}.$error.required">{{- field.name }} require.</span>
+        </div>
+        {% endif -%}        
+    </div>
+    {% endif -%}
+    {% endfor -%}
+
+    <button class="button is-primary" ng-disabled="form.$invalid" type="submit"><i class="fa fa-save"></i> &nbsp; Save</button>
+
+</form>

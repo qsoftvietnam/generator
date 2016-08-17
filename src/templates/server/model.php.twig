@@ -1,0 +1,22 @@
+{% autoescape %}
+<?php
+
+namespace {{ model.namespace -}}Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class {{ model.name }} extends Model
+{	
+    
+	{% if model.table_name -%}	
+	/**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+	protected $table = '{{- model.table_name }}';
+	{% endif %}	
+
+}
+
+{% endautoescape %}

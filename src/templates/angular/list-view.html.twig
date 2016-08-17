@@ -1,0 +1,52 @@
+<div ui-view>
+    <br>
+    <div class="page-box">
+        <div class="box-header">
+            <h3 class="page-box-title">List {{ model.name -}}</h3>
+            <div class="box-tools">
+                <a class="button" ng-click="vm.create()"><i class="fa fa-plus"></i></a>
+                <a class="button" ng-click="vm.reload()"><i class="fa fa-refresh"></i></a>
+            </div>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table is-bordered is-striped is-narrow">
+                <thead>
+                    <tr>
+                        {% for field in model.fields -%}
+                        {% if field.options.references == false -%}
+                        <th start-case>{{- field.name -}}</th>
+                        {% endif -%}
+                        {% endfor -%}
+                        <th></th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        {% for field in model.fields -%}
+                        {% if field.options.references == false -%}
+                        <th start-case>{{- field.name -}}</th>
+                        {% endif -%}
+                        {% endfor -%}
+                        <th></th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr ng-repeat="item in vm.datas.data track by item.id">
+                        {% for field in model.fields -%}
+                        {% if field.options.references == false -%}
+                        <td ng-bind="item.{{- field.name -}}"></td>
+                        {% endif -%}
+                        {% endfor -%}                
+                        <td class="has-text-right">
+                            <a class="button is-primary" ng-click="vm.view(item)"><i class="fa fa-eye"></i></a>
+                            <a class="button is-primary" ng-click="vm.edit(item)"><i class="fa fa-pencil"></i></a>
+                            <a class="button is-danger" ng-click="vm.delete(item)"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>            
+                </tbody>
+            </table>
+            <uib-pagination boundary-links="true" total-items="vm.datas.total" ng-model="vm.datas.current_page" items-per-page="vm.datas.per_page" ng-change="vm.pageChanged()"></uib-pagination>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+</div>    

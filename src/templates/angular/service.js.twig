@@ -1,0 +1,33 @@
+{% autoescape %}
+(function() {
+	'use strict';
+
+	angular.module('{{model.serviceName}}')
+		.service('{{model.name}}Service', ['Restangular', function(Restangular) {
+			var service = Restangular.all('{{model.prefix}}');
+
+			var sv = {};
+			sv.getList = function() {
+				return service.getList();
+			};
+
+			sv.getAll = function(params) {
+				return service.customGET(null, params);
+			};
+
+			sv.get = function(id) {
+				return service.get(id);
+			};
+
+			sv.add = function(data) {
+				return service.post(data);
+			};
+		
+			sv.remove = function(data) {
+				return service.customDELETE(data.id || data);
+			};
+
+			return sv;
+		}]);
+})();
+{% endautoescape %}

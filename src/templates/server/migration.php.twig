@@ -1,0 +1,45 @@
+{% autoescape %}
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+/**
+ *
+ * @package qsoft/generator
+ *
+ */
+class Create{{- model.name -}}Table extends Migration
+{
+	/**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('{{- model.table_name -}}', function (Blueprint $table) {
+            $table->increments('id');
+            {% for field in model.fields -%}
+            $table->{{- field.key -}}('{{- field.name -}}'){% if field.unsigned -%}->unsigned(){% endif -%}{% if field.index -%}->index(){% endif -%}{% if field.nullable -%}->nullable(){% endif -%}{% if field.unique -%}->unique(){% endif -%};
+            {% if field.ref -%}
+            $table->foreign('{{- field.name -}}')->references('{{- field.references -}}')->on('{{- field.on -}}')->onDelete('{{- field.onDelete -}}');
+            {% endif -%}
+
+            {% endfor -%}            
+            $table->timestamps();            
+
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('{{- model.table_name -}}');
+    }
+}
+{% endautoescape %}
