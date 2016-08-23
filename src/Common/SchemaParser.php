@@ -70,7 +70,8 @@ class SchemaParser
     private function splitIntoFields($schema)
     {
         //return array_map('trim', explode(',', $schema));
-        return preg_split('/,\s?(?![^()]*\))/', $schema);
+        $parse = preg_split('/,\s?(?![^()]*\))/', $schema);
+        return array_map('trim', $parse);
     }
 
     /**

@@ -17,13 +17,6 @@ return array(
 
     /**
      *
-     * Api Url generator
-     *
-     */
-    'generator_url'      => 'api/v1/generator',
-
-    /**
-     *
      *
      */
     'server_path'        => base_path('/generator/server'),

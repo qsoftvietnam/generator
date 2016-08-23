@@ -5,18 +5,21 @@
  * @Last Modified by:   thedv
  * @Last Modified time: 2016-07-29 15:31:08
  */
-Route::resource(config('qsoft-generator.generator_url'), 'GenerateController');
+Route::group(['middleware' => 'api'], function () {
 
-Route::get('download', 'DownloadController@download');
+    Route::get('download', 'DownloadController@download');
 
-Route::group(['prefix' => 'api/v1'], function () {
-    Route::group(['namespace' => 'Api'], function () {
-        Route::resource('field-type-migration', 'FieldTypeController');
+    Route::group(['prefix' => 'api/v1'], function () {
+        Route::resource('generator', 'GenerateController');
+
+        Route::group(['namespace' => 'Api'], function () {
+            Route::resource('field-type-migration', 'FieldTypeController');
+        });
     });
-});
 
-Route::get(config('qsoft-generator.url'), function () {
-    return view('qsoft::layouts.app');
-});
+    Route::get(config('qsoft-generator.url'), function () {
+        return view('qsoft::layouts.app');
+    });
 
-Route::resource('schema', 'SchemaGenerateController');
+    Route::resource('schema', 'SchemaGenerateController');
+});
