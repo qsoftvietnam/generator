@@ -3,7 +3,7 @@
 ## How to install
 
 ```shell
-	composer require qsoft/generator:dev-master
+	composer require qsoft/generator
 ```
 
 ### Provider
@@ -21,5 +21,16 @@
 ### Publish template and config
 
 ```shell
-	php artisan vendor:publish
+	php artisan vendor:publish --provider="Qsoft\Generator\GeneratorServiceProvider"
+```
+### Add except for `api`
+```php
+	/**
+     * The URIs that should be excluded from CSRF verification.
+     *
+     * @var array
+     */
+    protected $except = [
+        '/api/*',
+    ];
 ```
