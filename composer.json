@@ -1,13 +1,13 @@
 {
-    "name": "qsoft/generator",
+    "name": "qsoftvn/generator",
     "type": "library",
     "description": "Generator angular for Laravel",
     "version": "1.0.0",
     "keywords": [
-        "Qsoft",
+        "Qsoftvn",
         "Generator"
     ],
-    "homepage": "https://github.com/qsoft/generator",
+    "homepage": "https://github.com/qsoftvietnam",
     "license": "MIT",
     "authors": [{
         "name": "Recycle Bin",
@@ -28,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Qsoft\\Generator\\": "src"
+            "Qsoftvn\\Generator\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Qsoft\\Generator\\": "tests"
+            "Qsoftvn\\Generator\\": "tests"
         }
     },
     "scripts": {

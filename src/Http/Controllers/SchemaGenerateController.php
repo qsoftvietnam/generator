@@ -5,13 +5,13 @@
  * @Last Modified by:   thedv
  * @Last Modified time: 2016-08-01 10:46:58
  */
-namespace Qsoft\Generator\Http\Controllers;
+namespace Qsoftvn\Generator\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Filesystem\Filesystem;
-use Qsoft\Generator\Common\MigrationBuilder;
-use Qsoft\Generator\Common\SchemaParser;
-use Qsoft\Generator\Ultis\Generator;
+use Qsoftvn\Generator\Common\MigrationBuilder;
+use Qsoftvn\Generator\Common\SchemaParser;
+use Qsoftvn\Generator\Ultis\Generator;
 
 class SchemaGenerateController extends Controller
 {

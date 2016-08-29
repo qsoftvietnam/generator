@@ -3,12 +3,12 @@
 ## How to install
 
 ```shell
-	composer require qsoft/generator
+	composer require qsoftvn/generator
 ```
 
 ### Provider
 ```php
-	Qsoft\Generator\GeneratorServiceProvider::class,
+	Qsoftvn\Generator\GeneratorServiceProvider::class,
 	Chumper\Zipper\ZipperServiceProvider::class,
 ```
 
@@ -21,7 +21,7 @@
 ### Publish template and config
 
 ```shell
-	php artisan vendor:publish --provider="Qsoft\Generator\GeneratorServiceProvider"
+	php artisan vendor:publish --provider="Qsoftvn\Generator\GeneratorServiceProvider"
 ```
 ### Add except for `api`
 ```php

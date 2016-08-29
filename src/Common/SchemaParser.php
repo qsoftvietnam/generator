@@ -5,7 +5,7 @@
  * @Last Modified by:   thedv
  * @Last Modified time: 2016-08-01 14:02:29
  */
-namespace Qsoft\Generator\Common;
+namespace Qsoftvn\Generator\Common;
 
 class SchemaParser
 {

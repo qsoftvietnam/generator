@@ -5,14 +5,14 @@
  * @Last Modified by:   thedv
  * @Last Modified time: 2016-08-01 15:13:51
  */
-namespace Qsoft\Generator\Ultis;
+namespace Qsoftvn\Generator\Ultis;
 
 use Carbon\Carbon;
 use File;
 use Illuminate\Console\AppNamespaceDetectorTrait;
-use Qsoft\Generator\Common\GUIParser;
-use Qsoft\Generator\Common\MigrationBuilder;
-use Qsoft\Generator\Common\SchemaParser;
+use Qsoftvn\Generator\Common\GUIParser;
+use Qsoftvn\Generator\Common\MigrationBuilder;
+use Qsoftvn\Generator\Common\SchemaParser;
 use Twig_Autoloader;
 use Twig_Environment;
 use Twig_Loader_Filesystem;

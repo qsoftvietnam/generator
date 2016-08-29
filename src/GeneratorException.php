@@ -5,7 +5,7 @@
  * @Last Modified by:   thedv
  * @Last Modified time: 2016-07-29 15:46:16
  */
-namespace Qsoft\Generator;
+namespace Qsoftvn\Generator;
 
 class GeneratorException extends \Exception
 {

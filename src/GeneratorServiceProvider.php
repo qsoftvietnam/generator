@@ -1,5 +1,5 @@
 <?php
-namespace Qsoft\Generator;
+namespace Qsoftvn\Generator;
 
 /**
  * @Author: Recycle Bin
@@ -14,7 +14,7 @@ use Illuminate\Routing\Router;
 
 class GeneratorServiceProvider extends ServiceProvider
 {
-    protected $namespace = 'Qsoft\Generator\Http\Controllers';
+    protected $namespace = 'Qsoftvn\Generator\Http\Controllers';
 
     /**
      * Perform post-registration booting of services.

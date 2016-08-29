@@ -1,10 +1,10 @@
 <?php
 
-namespace Qsoft\Generator\Http\Controllers\Api;
+namespace Qsoftvn\Generator\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Qsoft\Generator\Models\FieldType;
+use Qsoftvn\Generator\Models\FieldType;
 
 class FieldTypeController extends Controller
 {

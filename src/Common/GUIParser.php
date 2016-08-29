@@ -5,7 +5,7 @@
  * @Last Modified by:   thedv
  * @Last Modified time: 2016-08-01 14:37:03
  */
-namespace Qsoft\Generator\Common;
+namespace Qsoftvn\Generator\Common;
 
 class GUIParser
 {

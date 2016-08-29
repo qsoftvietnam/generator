@@ -6,11 +6,11 @@
  * @Last Modified time: 2016-08-01 11:02:21
  */
 
-namespace Qsoft\Generator\Http\Controllers;
+namespace Qsoftvn\Generator\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Qsoft\Generator\Ultis\Generator;
+use Qsoftvn\Generator\Ultis\Generator;
 
 class GenerateController extends Controller
 {

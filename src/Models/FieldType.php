@@ -1,6 +1,6 @@
 <?php
 
-namespace Qsoft\Generator\Models;
+namespace Qsoftvn\Generator\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

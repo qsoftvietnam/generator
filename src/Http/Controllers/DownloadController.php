@@ -5,7 +5,7 @@
  * @Last Modified by:   Duong The
  * @Last Modified time: 2016-07-14 09:18:04
  */
-namespace Qsoft\Generator\Http\Controllers;
+namespace Qsoftvn\Generator\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use File;

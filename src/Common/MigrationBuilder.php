@@ -7,9 +7,9 @@
  * @Last Modified time: 2016-08-01 13:45:09
  */
 
-namespace Qsoft\Generator\Common;
+namespace Qsoftvn\Generator\Common;
 
-use Qsoft\Generator\GeneratorException;
+use Qsoftvn\Generator\GeneratorException;
 
 class MigrationBuilder
 {
